@@ -59,7 +59,7 @@ SwingEvent.OnServerEvent:Connect(function(player, sword)
 	local swordStats = Weapons[sword.Name]
 	if not swordStats then return end
 
-	local DAMAGE = swordStats.damage or 10
+	local DAMAGE = swordStats.damage or 20
 	local RANGE = swordStats.range or 8
 	local KNOCKBACK = swordStats.knockback or 0
 	local MOMENTUM = swordStats.momentum
