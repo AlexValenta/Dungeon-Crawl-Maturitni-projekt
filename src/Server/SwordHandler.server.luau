@@ -64,7 +64,7 @@ SwingEvent.OnServerEvent:Connect(function(player, sword)
 	local KNOCKBACK = swordStats.knockback or 0
 	local MOMENTUM = swordStats.momentum
 
-	-- Ensure sword has sounds set up
+	
 	local swingSound = sword.Handle:FindFirstChild("SwingSound")
 	local hitSound = sword.Handle:FindFirstChild("HitSound")
 
@@ -110,7 +110,7 @@ SwingEvent.OnServerEvent:Connect(function(player, sword)
 		end
 	end
 
-	-- Play hit sound once if we damaged someone
+	
 	if hitSomething and hitSound then
 		hitSound:Play()
 	end
