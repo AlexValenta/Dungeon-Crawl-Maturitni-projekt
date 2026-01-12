@@ -9,12 +9,6 @@
       "$path": "src/Server"
     },
     "StarterPlayer": {
-      "RagdollSCript": {
-        "$className": "Script",
-        "$properties": {
-          "Source": "\nlocal humanoid = script.Parent:WaitForChild(\"Humanoid\")\n\nhumanoid.BreakJointsOnDeath = false\n\nhumanoid.Died:Connect(function()\n\tfor index,joint in pairs(script.Parent:GetDescendants()) do\n\t\tif joint:IsA(\"Motor6D\") then\n\t\t\tlocal socket = Instance.new(\"BallSocketConstraint\")\n\t\t\tlocal a1 = Instance.new(\"Attachment\")\n\t\t\tlocal a2 = Instance.new(\"Attachment\")\n\t\t\ta1.Parent = joint.Part0\n\t\t\ta2.Parent = joint.Part1\n\t\t\tsocket.Parent = joint.Parent\n\t\t\tsocket.Attachment0 = a1\n\t\t\tsocket.Attachment1 = a2\n\t\t\ta1.CFrame = joint.C0\n\t\t\ta2.CFrame = joint.C1\n\t\t\tsocket.LimitsEnabled = true\n\t\t\tsocket.TwistLimitsEnabled = true\n\t\t\tjoint:Destroy()\n\t\tend\n\tend\nend)"
-        }
-      },
       "StarterPlayerScripts": {
         "$path": "src/Client"
       }
