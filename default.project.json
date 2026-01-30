@@ -45,9 +45,9 @@
               "$className": "TouchTransmitter"
             },
             "$properties": {
+              "TopSurface": "Smooth",
               "BottomSurface": "Smooth",
               "Size": [1, 1, 1],
-              "TopSurface": "Smooth",
               "CanCollide": false,
               "CFrame": [-22.1434, 5.0082, 14.28, 1, 0, 0, 0, 1, 0, 0, 0, 1]
             }
@@ -109,9 +109,9 @@
               "$className": "TouchTransmitter"
             },
             "$properties": {
+              "TopSurface": "Smooth",
               "BottomSurface": "Smooth",
               "Size": [1, 1, 1],
-              "TopSurface": "Smooth",
               "CanCollide": false,
               "CFrame": [-22.1311, 4.8464, 14.2619, 1, 0, 0, 0, 1, 0, 0, 0, 1]
             }
@@ -140,14 +140,14 @@
               "$className": "TouchTransmitter"
             },
             "$properties": {
-              "Size": [1.3189, 1.1221, 0.7953],
               "Color": [65, 54, 48],
-              "Material": "Sand",
-              "CanCollide": false,
               "CFrame": [-22.1315, 4.452, 13.9797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-              "MeshContent": "rbxassetid://431721205",
+              "Material": "Sand",
+              "RenderFidelity": "Precise",
+              "Size": [1.3189, 1.1221, 0.7953],
+              "CanCollide": false,
               "InitialSize": [1.3189, 1.1221, 0.7953],
-              "RenderFidelity": "Precise"
+              "MeshContent": "rbxassetid://431721205"
             }
           },
           "$properties": {
@@ -157,12 +157,12 @@
         "Body Colors": {
           "$className": "BodyColors",
           "$properties": {
-            "HeadColor3": [0.7922, 0.749, 0.6392],
-            "TorsoColor3": [0.7922, 0.749, 0.6392],
             "LeftLegColor3": [0.7922, 0.749, 0.6392],
+            "HeadColor3": [0.7922, 0.749, 0.6392],
             "LeftArmColor3": [0.7922, 0.749, 0.6392],
             "RightArmColor3": [0.7922, 0.749, 0.6392],
-            "RightLegColor3": [0.3882, 0.3725, 0.3843]
+            "RightLegColor3": [0.3882, 0.3725, 0.3843],
+            "TorsoColor3": [0.7922, 0.749, 0.6392]
           }
         },
         "Head": {
@@ -208,20 +208,20 @@
             }
           },
           "$properties": {
-            "Size": [2, 1, 1],
-            "FormFactor": "Symmetric",
-            "Color": [202, 191, 163],
             "TopSurface": "Smooth",
+            "Size": [2, 1, 1],
+            "Color": [202, 191, 163],
+            "FormFactor": "Symmetric",
             "CFrame": [-22.1315, 4.752, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1]
           }
         },
         "Humanoid": {
           "$className": "Humanoid",
           "$properties": {
-            "AutoJumpEnabled": false,
             "WalkSpeed": 13,
             "JumpHeight": 0,
-            "UseJumpPower": false
+            "UseJumpPower": false,
+            "AutoJumpEnabled": false
           }
         },
         "HumanoidRootPart": {
@@ -229,24 +229,24 @@
           "RootJoint": {
             "$className": "Motor6D",
             "$properties": {
-              "MaxVelocity": 0.1,
               "C0": [0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0],
-              "C1": [0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0]
+              "C1": [0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0],
+              "MaxVelocity": 0.1
             }
           },
           "$properties": {
-            "Size": [2, 2, 1],
-            "FormFactor": "Symmetric",
+            "LeftParamB": 0,
             "Color": [187, 179, 178],
-            "RightParamA": 0,
-            "CanCollide": false,
             "CFrame": [-22.1315, 3.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-            "Transparency": 1,
-            "BottomSurface": "Smooth",
-            "LeftParamA": 0,
+            "FormFactor": "Symmetric",
             "RightParamB": 0,
+            "LeftParamA": 0,
             "TopSurface": "Smooth",
-            "LeftParamB": 0
+            "BottomSurface": "Smooth",
+            "Size": [2, 2, 1],
+            "CanCollide": false,
+            "Transparency": 1,
+            "RightParamA": 0
           }
         },
         "Left Arm": {
@@ -259,8 +259,8 @@
           },
           "$properties": {
             "Size": [1, 2, 1],
-            "FormFactor": "Symmetric",
             "Color": [202, 191, 163],
+            "FormFactor": "Symmetric",
             "CanCollide": false,
             "CFrame": [-23.6315, 3.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1]
           }
@@ -270,8 +270,8 @@
           "$properties": {
             "BottomSurface": "Smooth",
             "Size": [1, 2, 1],
-            "FormFactor": "Symmetric",
             "Color": [202, 191, 163],
+            "FormFactor": "Symmetric",
             "CanCollide": false,
             "CFrame": [-22.6315, 1.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1]
           }
@@ -292,8 +292,8 @@
           },
           "$properties": {
             "Size": [1, 2, 1],
-            "FormFactor": "Symmetric",
             "Color": [202, 191, 163],
+            "FormFactor": "Symmetric",
             "CanCollide": false,
             "CFrame": [-20.6315, 3.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1]
           }
@@ -303,8 +303,8 @@
           "$properties": {
             "BottomSurface": "Smooth",
             "Size": [1, 2, 1],
-            "FormFactor": "Symmetric",
             "Color": [99, 95, 98],
+            "FormFactor": "Symmetric",
             "CanCollide": false,
             "CFrame": [-21.6315, 1.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1]
           }
@@ -332,17 +332,17 @@
           "Left Hip": {
             "$className": "Motor6D",
             "$properties": {
-              "MaxVelocity": 0.1,
               "C0": [-1, -1, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0],
-              "C1": [-0.5, 1, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0]
+              "C1": [-0.5, 1, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0],
+              "MaxVelocity": 0.1
             }
           },
           "Left Shoulder": {
             "$className": "Motor6D",
             "$properties": {
-              "MaxVelocity": 0.1,
               "C0": [-1, 0.5, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0],
-              "C1": [0.5, 0.5, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0]
+              "C1": [0.5, 0.5, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0],
+              "MaxVelocity": 0.1
             }
           },
           "LeftCollarAttachment": {
@@ -354,9 +354,9 @@
           "Neck": {
             "$className": "Motor6D",
             "$properties": {
-              "MaxVelocity": 0.1,
               "C0": [0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0],
-              "C1": [0, -0.5, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0]
+              "C1": [0, -0.5, 0, -1, 0, 0, 0, 0, 1, 0, 1, 0],
+              "MaxVelocity": 0.1
             }
           },
           "NeckAttachment": {
@@ -368,17 +368,17 @@
           "Right Hip": {
             "$className": "Motor6D",
             "$properties": {
-              "MaxVelocity": 0.1,
               "C0": [1, -1, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0],
-              "C1": [0.5, 1, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0]
+              "C1": [0.5, 1, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0],
+              "MaxVelocity": 0.1
             }
           },
           "Right Shoulder": {
             "$className": "Motor6D",
             "$properties": {
-              "MaxVelocity": 0.1,
               "C0": [1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0],
-              "C1": [-0.5, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0]
+              "C1": [-0.5, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, 0, 0],
+              "MaxVelocity": 0.1
             }
           },
           "RightCollarAttachment": {
@@ -409,16 +409,16 @@
             "$className": "Decal"
           },
           "$properties": {
-            "Size": [2, 2, 1],
-            "FormFactor": "Symmetric",
-            "Color": [202, 191, 163],
-            "RightParamA": 0,
-            "CFrame": [-22.1315, 3.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-            "LeftParamA": 0,
-            "RightParamB": 0,
-            "LeftSurface": "Weld",
             "LeftParamB": 0,
-            "RightSurface": "Weld"
+            "Color": [202, 191, 163],
+            "CFrame": [-22.1315, 3.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
+            "FormFactor": "Symmetric",
+            "RightParamB": 0,
+            "RightSurface": "Weld",
+            "LeftParamA": 0,
+            "LeftSurface": "Weld",
+            "Size": [2, 2, 1],
+            "RightParamA": 0
           }
         }
       },
@@ -426,12 +426,12 @@
         "$path": "src/Client"
       },
       "$properties": {
-        "AutoJumpEnabled": false,
-        "CharacterJumpHeight": 0,
         "CameraMaxZoomDistance": 28,
-        "EnableMouseLockOption": false,
         "CharacterWalkSpeed": 13,
-        "CharacterUseJumpPower": false
+        "CharacterUseJumpPower": false,
+        "EnableMouseLockOption": false,
+        "AutoJumpEnabled": false,
+        "CharacterJumpHeight": 0
       }
     }
   }

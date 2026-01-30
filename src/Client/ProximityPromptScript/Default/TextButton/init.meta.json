@@ -1,0 +1,10 @@
+{
+  "className": "TextButton",
+  "properties": {
+    "BackgroundTransparency": 1,
+    "Selectable": false,
+    "Size": [[1.0, 0.0], [1.0, 0.0]],
+    "TextTransparency": 1,
+    "TextWrapped": true
+  }
+}

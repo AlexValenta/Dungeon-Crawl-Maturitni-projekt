@@ -1,0 +1,21 @@
+{
+  "className": "TextLabel",
+  "properties": {
+    "BackgroundColor3": [0.9765, 0.9725, 1],
+    "BackgroundTransparency": 1,
+    "FontFace": {
+      "family": "rbxasset://fonts/families/GothamSSm.json",
+      "weight": "Medium",
+      "style": "Normal",
+      "cachedFaceId": null
+    },
+    "Position": [[0.5, -24.0], [0.0, -10.0]],
+    "Size": [[1.0, 0.0], [1.0, 0.0]],
+    "Text": "Object Text",
+    "TextColor3": [0.698, 0.698, 0.698],
+    "TextSize": 14,
+    "TextTransparency": 1,
+    "TextWrapped": true,
+    "TextXAlignment": "Left"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "className": "ParticleEmitter",
+  "properties": {
+    "Attributes": {
+      "EmitDelay": 0,
+      "EmitCount": 4
+    },
+    "Brightness": 8,
+    "Drag": 22.5,
+    "Enabled": false,
+    "Lifetime": [0.6, 0.8],
+    "Orientation": "VelocityParallel",
+    "Rate": 30,
+    "Size": [{
+        "time": 0.0,
+        "value": 0.0,
+        "envelope": 0.0
+      }, {
+        "time": 0.3445,
+        "value": 0.4695,
+        "envelope": 0.0
+      }, {
+        "time": 1.0,
+        "value": 0.0,
+        "envelope": 0.0
+      }],
+    "Speed": [54.9634, 59.5437],
+    "SpreadAngle": [360, -360],
+    "Squash": [{
+        "time": 0.0,
+        "value": 0.0,
+        "envelope": 0.0
+      }, {
+        "time": 0.0262,
+        "value": -0.525,
+        "envelope": 0.0
+      }, {
+        "time": 1.0,
+        "value": -0.0375,
+        "envelope": 0.0
+      }],
+    "Texture": "rbxassetid://8030760338",
+    "Transparency": [{
+        "time": 0.0,
+        "value": 0.0,
+        "envelope": 0.0
+      }, {
+        "time": 0.1,
+        "value": 0.0446,
+        "envelope": 0.0
+      }, {
+        "time": 0.2,
+        "value": 0.0948,
+        "envelope": 0.0
+      }, {
+        "time": 0.3,
+        "value": 0.1522,
+        "envelope": 0.0
+      }, {
+        "time": 0.4,
+        "value": 0.219,
+        "envelope": 0.0
+      }, {
+        "time": 0.5,
+        "value": 0.2978,
+        "envelope": 0.0
+      }, {
+        "time": 0.6,
+        "value": 0.3914,
+        "envelope": 0.0
+      }, {
+        "time": 0.7,
+        "value": 0.5035,
+        "envelope": 0.0
+      }, {
+        "time": 0.8,
+        "value": 0.6384,
+        "envelope": 0.0
+      }, {
+        "time": 0.9,
+        "value": 0.8016,
+        "envelope": 0.0
+      }, {
+        "time": 1.0,
+        "value": 1.0,
+        "envelope": 0.0
+      }],
+    "ZOffset": 1
+  }
+}

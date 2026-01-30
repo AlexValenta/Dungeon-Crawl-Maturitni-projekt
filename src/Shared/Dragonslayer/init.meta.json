@@ -1,9 +1,0 @@
-{
-  "className": "Tool",
-  "properties": {
-    "Enabled": false,
-    "Grip": [0, -3.6, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0],
-    "TextureContent": "rbxassetid://6061857502",
-    "ToolTip": "\"It was too big to be called a sword. Massive, thick, heavy, and far too rough. Indeed, it was a heap of raw iron.\""
-  }
-}
