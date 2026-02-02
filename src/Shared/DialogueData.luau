@@ -6,9 +6,10 @@ local DialogueData = {
 	},
 
 	["ArcaneKnowledge"] = {
-		"Je tu tma a zima...",
-		"Slyšel jsem něco v křoví!",
-		"Raději bychom měli jít dál."
+		"You stumble upon a ritual which took place near the prisoner torture chamber..",
+		"You quickly flip through the pages and learn what was your purpose here as a prisoner",
+		"You were supposed to serve him, The Great Tyrant..",
+		"You set out on a mission to find the one responsible for all of this.."
 	},
 
 	-- Zde si můžeš přidat další: ["ID"] = {"Text 1", "Text 2"},
