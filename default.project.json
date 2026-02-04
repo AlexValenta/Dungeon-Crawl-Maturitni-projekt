@@ -46,10 +46,10 @@
             },
             "$properties": {
               "CanCollide": false,
-              "BottomSurface": "Smooth",
+              "TopSurface": "Smooth",
               "CFrame": [-22.1434, 5.0082, 14.28, 1, 0, 0, 0, 1, 0, 0, 0, 1],
               "Size": [1, 1, 1],
-              "TopSurface": "Smooth"
+              "BottomSurface": "Smooth"
             }
           },
           "ThumbnailConfiguration": {
@@ -110,10 +110,10 @@
             },
             "$properties": {
               "CanCollide": false,
-              "BottomSurface": "Smooth",
+              "TopSurface": "Smooth",
               "CFrame": [-22.1311, 4.8464, 14.2619, 1, 0, 0, 0, 1, 0, 0, 0, 1],
               "Size": [1, 1, 1],
-              "TopSurface": "Smooth"
+              "BottomSurface": "Smooth"
             }
           },
           "ThumbnailConfiguration": {
@@ -426,12 +426,8 @@
         "$path": "src/Client"
       },
       "$properties": {
-        "AutoJumpEnabled": false,
-        "EnableMouseLockOption": false,
-        "CameraMaxZoomDistance": 28,
-        "CharacterWalkSpeed": 13,
-        "CharacterJumpHeight": 0,
-        "CharacterUseJumpPower": false
+        "CharacterUseJumpPower": false,
+        "CameraMaxZoomDistance": 128
       }
     }
   }
