@@ -1,8 +1,8 @@
 local DialogueData = {
 	["Intro"] = {
-		"You wake up inside your rotting cell but something seems off..",
-		"You quickly notice that the guards and all the prisoners were massacred by something unknown..",
-		"All thats left for you is to escape this damned Dungeon."
+		"You find yourself in a an unfamiliar Stone Fortress..",
+		"Only the fire that you have lit is the clue that this is the right path towards freedom..",
+		"The fire is the only thing that keeps you moving forward.."
 	},
 
 	["ArcaneKnowledge"] = {

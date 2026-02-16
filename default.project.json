@@ -36,9 +36,9 @@
             "SpecialMesh": {
               "$className": "SpecialMesh",
               "$properties": {
+                "MeshId": "rbxassetid://85348175127669",
                 "TextureId": "rbxassetid://84316369711566",
-                "MeshType": "FileMesh",
-                "MeshId": "rbxassetid://85348175127669"
+                "MeshType": "FileMesh"
               }
             },
             "TouchInterest": {
@@ -100,9 +100,9 @@
             "SpecialMesh": {
               "$className": "SpecialMesh",
               "$properties": {
+                "MeshId": "rbxassetid://135284866863500",
                 "TextureId": "rbxassetid://110356859344885",
-                "MeshType": "FileMesh",
-                "MeshId": "rbxassetid://135284866863500"
+                "MeshType": "FileMesh"
               }
             },
             "TouchInterest": {
@@ -157,12 +157,12 @@
         "Body Colors": {
           "$className": "BodyColors",
           "$properties": {
-            "HeadColor3": [0.7922, 0.749, 0.6392],
+            "LeftArmColor3": [0.7922, 0.749, 0.6392],
             "RightLegColor3": [0.3882, 0.3725, 0.3843],
             "RightArmColor3": [0.7922, 0.749, 0.6392],
             "TorsoColor3": [0.7922, 0.749, 0.6392],
-            "LeftLegColor3": [0.7922, 0.749, 0.6392],
-            "LeftArmColor3": [0.7922, 0.749, 0.6392]
+            "HeadColor3": [0.7922, 0.749, 0.6392],
+            "LeftLegColor3": [0.7922, 0.749, 0.6392]
           }
         },
         "Head": {
@@ -209,10 +209,10 @@
           },
           "$properties": {
             "TopSurface": "Smooth",
-            "FormFactor": "Symmetric",
+            "Size": [2, 1, 1],
             "Color": [202, 191, 163],
             "CFrame": [-22.1315, 4.752, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-            "Size": [2, 1, 1]
+            "FormFactor": "Symmetric"
           }
         },
         "Humanoid": {
@@ -259,21 +259,21 @@
           },
           "$properties": {
             "CanCollide": false,
-            "FormFactor": "Symmetric",
+            "Size": [1, 2, 1],
             "Color": [202, 191, 163],
             "CFrame": [-23.6315, 3.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-            "Size": [1, 2, 1]
+            "FormFactor": "Symmetric"
           }
         },
         "Left Leg": {
           "$className": "Part",
           "$properties": {
             "CanCollide": false,
-            "FormFactor": "Symmetric",
+            "Size": [1, 2, 1],
             "Color": [202, 191, 163],
             "CFrame": [-22.6315, 1.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
             "BottomSurface": "Smooth",
-            "Size": [1, 2, 1]
+            "FormFactor": "Symmetric"
           }
         },
         "Pants": {
@@ -292,21 +292,21 @@
           },
           "$properties": {
             "CanCollide": false,
-            "FormFactor": "Symmetric",
+            "Size": [1, 2, 1],
             "Color": [202, 191, 163],
             "CFrame": [-20.6315, 3.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
-            "Size": [1, 2, 1]
+            "FormFactor": "Symmetric"
           }
         },
         "Right Leg": {
           "$className": "Part",
           "$properties": {
             "CanCollide": false,
-            "FormFactor": "Symmetric",
+            "Size": [1, 2, 1],
             "Color": [99, 95, 98],
             "CFrame": [-21.6315, 1.252, 14.2797, 1, 0, 0, 0, 1, 0, 0, 0, 1],
             "BottomSurface": "Smooth",
-            "Size": [1, 2, 1]
+            "FormFactor": "Symmetric"
           }
         },
         "Shirt": {
@@ -426,12 +426,8 @@
         "$path": "src/Client"
       },
       "$properties": {
-        "AutoJumpEnabled": false,
-        "CameraMaxZoomDistance": 28,
         "CharacterUseJumpPower": false,
-        "CharacterJumpHeight": 0,
-        "CharacterWalkSpeed": 13,
-        "EnableMouseLockOption": false
+        "CameraMaxZoomDistance": 20
       }
     }
   }
