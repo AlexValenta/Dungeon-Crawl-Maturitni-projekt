@@ -2,14 +2,14 @@ local DialogueData = {
 	["Intro"] = {
 		"You find yourself in a an unfamiliar Stone Fortress..",
 		"Only the fire that you have lit is the clue that this is the right path towards freedom..",
-		"The fire is the only thing that keeps you moving forward.."
+		"The fire is the only thing that keeps you moving forward..",
+		"Find the lever to open the gate holding you here.."
 	},
 
-	["ArcaneKnowledge"] = {
-		"You stumble upon a ritual which took place near the prisoner torture chamber..",
-		"You quickly flip through the pages and learn what was your purpose here as a prisoner",
-		"You were supposed to serve him, The Great Tyrant..",
-		"You set out on a mission to find the one responsible for all of this.."
+	["EndDialogue"] = {
+		"You sucessfully defeated the Lich of the Tomb..",
+		"With the help of the glowing green fire you stumble upon a lever that opens the gate to your next challenge..",
+		"Only you who remains alive can see what is kept behind those doors.."
 	},
 
 	-- Zde si můžeš přidat další: ["ID"] = {"Text 1", "Text 2"},
