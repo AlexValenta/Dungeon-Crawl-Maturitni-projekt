@@ -1,21 +1,16 @@
-
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local CollectionService = game:GetService("CollectionService")
 
-
 UserInputService.MouseIconEnabled = false
-
 
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
 
-
 local character
 local humanoid
 local rootPart
-
 
 local CameraState = {
 	Free = 1,
@@ -23,23 +18,24 @@ local CameraState = {
 }
 local currentState = CameraState.Free
 
--- Nastavení
 local MAX_LOCK_ON_DISTANCE = 60
-local LOCKON_OFFSET = CFrame.new(0, 3, 12) 
+local LOCKON_OFFSET = CFrame.new(0, 3, 12)
 local CAMERA_SMOOTHNESS = 0.15
-local CAMERA_WALL_OFFSET = 0.5 
+local CAMERA_WALL_OFFSET = 0.5
+local CHARACTER_ROTATION_SPEED = 0.2
 
-
-local CHARACTER_ROTATION_SPEED = 0.2 
-
+local BOB_SPEED = 6
+local BOB_INTENSITY = 0.3
+local TILT_ANGLE = 2.5
+local TILT_SPEED = 6
 
 local rayParams = RaycastParams.new()
 rayParams.FilterType = Enum.RaycastFilterType.Exclude
 
--- Proměnné pro stav
 local currentTarget = nil
-local isMouseUnlocked = false 
-
+local isMouseUnlocked = false
+local bobTime = 0
+local currentTilt = 0
 
 local findNearestEnemy
 local updateCamera
@@ -49,9 +45,6 @@ local transitionToFreeCam
 local toggleLockOn
 local onCharacterAdded
 local updateMouseBehavior
-
-
-
 
 findNearestEnemy = function()
 	local bestTarget = nil
@@ -87,9 +80,7 @@ findNearestEnemy = function()
 	return bestTarget
 end
 
-
 updateMouseBehavior = function()
-	
 	UserInputService.MouseIconEnabled = false
 
 	if isMouseUnlocked then
@@ -98,7 +89,6 @@ updateMouseBehavior = function()
 		UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 	end
 end
-
 
 updateCamera = function(dt)
 	updateMouseBehavior()
@@ -110,11 +100,9 @@ updateCamera = function(dt)
 	if currentState == CameraState.LockOn then
 		updateLockOn(dt)
 	elseif currentState == CameraState.Free then
-		
 		updateFreeCam(dt)
 	end
 end
-
 
 updateLockOn = function(dt)
 	if not currentTarget or not currentTarget.Parent or not currentTarget.Parent:FindFirstChild("Humanoid") or currentTarget.Parent:FindFirstChild("Humanoid").Health <= 0 then
@@ -122,15 +110,12 @@ updateLockOn = function(dt)
 		return
 	end
 
-	
 	local lookVector = (currentTarget.Position - rootPart.Position).Unit
 	local targetCFrame = CFrame.new(rootPart.Position, rootPart.Position + Vector3.new(lookVector.X, 0, lookVector.Z))
 	rootPart.CFrame = rootPart.CFrame:Lerp(targetCFrame, CAMERA_SMOOTHNESS)
 
-	
 	local cameraFocus = currentTarget.Position + Vector3.new(0, 1.5, 0)
 
-	
 	local cameraPivotPos = (rootPart.CFrame * CFrame.new(LOCKON_OFFSET.X, LOCKON_OFFSET.Y, 0)).Position
 	local idealCamPos = (rootPart.CFrame * LOCKON_OFFSET).Position
 	local camDirection = (idealCamPos - cameraPivotPos).Unit
@@ -138,7 +123,6 @@ updateLockOn = function(dt)
 
 	rayParams.FilterDescendantsInstances = {character}
 
-	
 	local ray = workspace:Raycast(cameraPivotPos, camDirection * camDistance, rayParams)
 
 	local finalCamPos
@@ -148,35 +132,59 @@ updateLockOn = function(dt)
 		finalCamPos = idealCamPos
 	end
 
-	
+	-- ViewBobLogic
+	local moveDir = humanoid.MoveDirection
+	local isMoving = moveDir.Magnitude > 0.1
+
+	if isMoving then
+		bobTime = bobTime + dt * BOB_SPEED
+	else
+		bobTime = 0
+	end
+
+	local bobX = math.cos(bobTime / 2) * (BOB_INTENSITY * 0.5)
+	local bobY = math.sin(bobTime) * BOB_INTENSITY
+
+	if not isMoving then
+		bobX = 0
+		bobY = 0
+	end
+
+	-- TiltLogic
+	local targetTilt = 0
+	if isMoving then
+		local rightVector = camera.CFrame.RightVector
+		local dot = moveDir:Dot(rightVector)
+		targetTilt = -dot * math.rad(TILT_ANGLE)
+	end
+
+	currentTilt = math.lerp(currentTilt, targetTilt, dt * TILT_SPEED)
+
 	local newCamCFrame = CFrame.lookAt(finalCamPos, cameraFocus)
+
+	newCamCFrame = newCamCFrame * CFrame.Angles(0, 0, currentTilt) * CFrame.new(bobX, bobY, 0)
+
 	camera.CFrame = camera.CFrame:Lerp(newCamCFrame, CAMERA_SMOOTHNESS)
 end
 
-
 updateFreeCam = function(dt)
-	
 	local moveDirection = humanoid.MoveDirection
 
-	
 	if moveDirection.Magnitude > 0.1 then
-		
 		local targetCFrame = CFrame.new(rootPart.Position, rootPart.Position + moveDirection)
-
-		
 		rootPart.CFrame = rootPart.CFrame:Lerp(targetCFrame, CHARACTER_ROTATION_SPEED)
 	end
 end
-
 
 transitionToFreeCam = function()
 	if currentState == CameraState.Free then return end
 
 	currentState = CameraState.Free
 	currentTarget = nil
+	bobTime = 0
+	currentTilt = 0
 
 	if humanoid then
-		
 		humanoid.AutoRotate = false
 	end
 
@@ -200,7 +208,6 @@ toggleLockOn = function()
 	end
 end
 
-
 onCharacterAdded = function(newChar)
 	character = newChar
 	humanoid = newChar:WaitForChild("Humanoid")
@@ -208,16 +215,14 @@ onCharacterAdded = function(newChar)
 
 	humanoid.Died:Connect(function()
 		transitionToFreeCam()
-		isMouseUnlocked = true 
+		isMouseUnlocked = true
 	end)
 
-	
 	transitionToFreeCam()
 	if humanoid then humanoid.AutoRotate = false end
 
-	isMouseUnlocked = false 
+	isMouseUnlocked = false
 end
-
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	if gameProcessed then return end
@@ -229,9 +234,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	end
 end)
 
-
 RunService:BindToRenderStep("SoulsCameraUpdate", Enum.RenderPriority.Camera.Value, updateCamera)
-
 
 player.CharacterAdded:Connect(onCharacterAdded)
 if player.Character then
