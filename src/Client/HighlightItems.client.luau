@@ -4,7 +4,7 @@ local RunService = game:GetService("RunService")
 
 local player = Players.LocalPlayer
 local tagName = "Highlight"
-local maxDistance = 6
+local maxDistance = 10 -- Vzdálenost ve studech
 
 -- Funkce pro získání pozice itemu (funguje pro Part i Model)
 local function getItemPosition(item)
