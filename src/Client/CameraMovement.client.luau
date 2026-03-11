@@ -3,6 +3,8 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local CollectionService = game:GetService("CollectionService")
 
+UserInputService.MouseIconEnabled = false
+
 local player = Players.LocalPlayer
 local camera = workspace.CurrentCamera
 
@@ -16,14 +18,12 @@ local CameraState = {
 }
 local currentState = CameraState.Free
 
--- Nastavení
 local MAX_LOCK_ON_DISTANCE = 60
 local LOCKON_OFFSET = CFrame.new(0, 3, 12)
 local CAMERA_SMOOTHNESS = 0.15
 local CAMERA_WALL_OFFSET = 0.5
 local CHARACTER_ROTATION_SPEED = 0.2
 
--- ViewBob a Tilt Nastavení
 local BOB_SPEED = 6
 local BOB_INTENSITY = 0.3
 local TILT_ANGLE = 2.5
@@ -32,20 +32,10 @@ local TILT_SPEED = 6
 local rayParams = RaycastParams.new()
 rayParams.FilterType = Enum.RaycastFilterType.Exclude
 
--- Proměnné pro stav
 local currentTarget = nil
 local isMouseUnlocked = false
-local isGameStarted = false
-
--- Proměnné pro efekty kamery
 local bobTime = 0
 local currentTilt = 0
-
--- GUI Reference
-local PlayerGui = player:WaitForChild("PlayerGui")
-local mainMenu = PlayerGui:WaitForChild("MainMenu")
-local frame = mainMenu:WaitForChild("Frame")
-local startButton = frame:WaitForChild("StartButton")
 
 local findNearestEnemy
 local updateCamera
@@ -55,14 +45,6 @@ local transitionToFreeCam
 local toggleLockOn
 local onCharacterAdded
 local updateMouseBehavior
-
--- === EVENT PRO TLAČÍTKO START ===
-startButton.MouseButton1Click:Connect(function()
-	if not isGameStarted then
-		isGameStarted = true
-		isMouseUnlocked = false
-	end
-end)
 
 findNearestEnemy = function()
 	local bestTarget = nil
@@ -99,25 +81,17 @@ findNearestEnemy = function()
 end
 
 updateMouseBehavior = function()
-	if not isGameStarted then
-		UserInputService.MouseIconEnabled = true
-		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
-		return
-	end
+	UserInputService.MouseIconEnabled = false
 
 	if isMouseUnlocked then
-		UserInputService.MouseIconEnabled = true
 		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
 	else
-		UserInputService.MouseIconEnabled = false
 		UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
 	end
 end
 
 updateCamera = function(dt)
 	updateMouseBehavior()
-
-	if not isGameStarted then return end
 
 	if not character or not humanoid or humanoid.Health <= 0 or not rootPart then
 		return
@@ -158,7 +132,7 @@ updateLockOn = function(dt)
 		finalCamPos = idealCamPos
 	end
 
-	-- ViewBob Logic
+	-- ViewBobLogic
 	local moveDir = humanoid.MoveDirection
 	local isMoving = moveDir.Magnitude > 0.1
 
@@ -176,7 +150,7 @@ updateLockOn = function(dt)
 		bobY = 0
 	end
 
-	-- Tilt Logic
+	-- TiltLogic
 	local targetTilt = 0
 	if isMoving then
 		local rightVector = camera.CFrame.RightVector
@@ -186,8 +160,8 @@ updateLockOn = function(dt)
 
 	currentTilt = math.lerp(currentTilt, targetTilt, dt * TILT_SPEED)
 
-	-- Final CFrame
 	local newCamCFrame = CFrame.lookAt(finalCamPos, cameraFocus)
+
 	newCamCFrame = newCamCFrame * CFrame.Angles(0, 0, currentTilt) * CFrame.new(bobX, bobY, 0)
 
 	camera.CFrame = camera.CFrame:Lerp(newCamCFrame, CAMERA_SMOOTHNESS)
@@ -219,8 +193,6 @@ transitionToFreeCam = function()
 end
 
 toggleLockOn = function()
-	if not isGameStarted then return end
-
 	if currentState == CameraState.LockOn then
 		transitionToFreeCam()
 
@@ -249,7 +221,7 @@ onCharacterAdded = function(newChar)
 	transitionToFreeCam()
 	if humanoid then humanoid.AutoRotate = false end
 
-	isMouseUnlocked = not isGameStarted
+	isMouseUnlocked = false
 end
 
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
@@ -258,9 +230,7 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	if input.KeyCode == Enum.KeyCode.C then
 		toggleLockOn()
 	elseif input.KeyCode == Enum.KeyCode.LeftAlt then
-		if isGameStarted then
-			isMouseUnlocked = not isMouseUnlocked
-		end
+		isMouseUnlocked = not isMouseUnlocked
 	end
 end)
 

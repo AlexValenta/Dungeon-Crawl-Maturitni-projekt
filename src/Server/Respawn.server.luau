@@ -16,6 +16,7 @@ remote.OnServerEvent:Connect(function(player)
 	if not success then
 		warn("Teleport selhal: " .. err)
 		
+		player:LoadCharacter()
 	end
 
 	
