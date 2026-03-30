@@ -1,7 +1,9 @@
 local DialogueData = {
 	["Intro"] = {
-		"You have appeared in a defiled scorched land which lurks with dangerous creatures that creep up on surviving bypassers..",
-		"Due to the extreme heat of this area, your Long Sword has melted and bent.. you are forced to use other measures.."
+		"You have made it to your final destination..",
+		"The only thing that stands in your way is him..",
+		"Slay the Great Tyrant and set all the souls free that were taken by him..",
+		"You cannot fall here."
 	},
 
 	["EndDialogue"] = {

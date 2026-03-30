@@ -18,7 +18,7 @@ local CameraState = {
 }
 local currentState = CameraState.Free
 
-local MAX_LOCK_ON_DISTANCE = 60
+local MAX_LOCK_ON_DISTANCE = 40
 local LOCKON_OFFSET = CFrame.new(0, 3, 12)
 local CAMERA_SMOOTHNESS = 0.15
 local CAMERA_WALL_OFFSET = 0.5
@@ -37,6 +37,7 @@ local isMouseUnlocked = false
 local bobTime = 0
 local currentTilt = 0
 
+-- Deklarace funkcí
 local findNearestEnemy
 local updateCamera
 local updateLockOn
@@ -46,6 +47,7 @@ local toggleLockOn
 local onCharacterAdded
 local updateMouseBehavior
 
+-- Funkce pro nalezení NEJBLIŽŠÍHO živého nepřítele v dosahu
 findNearestEnemy = function()
 	local bestTarget = nil
 	local minDistance = MAX_LOCK_ON_DISTANCE
@@ -60,6 +62,7 @@ findNearestEnemy = function()
 		local enemyHumanoid = enemy:FindFirstChild("Humanoid")
 		local enemyRoot = enemy:FindFirstChild("HumanoidRootPart")
 
+		-- Hledáme pouze ty, kteří mají více než 0 HP
 		if enemyHumanoid and enemyRoot and enemyHumanoid.Health > 0 then
 			local dist = (playerPos - enemyRoot.Position).Magnitude
 
@@ -69,6 +72,7 @@ findNearestEnemy = function()
 				local direction = (enemyRoot.Position - camera.CFrame.Position)
 				local ray = workspace:Raycast(camera.CFrame.Position, direction.Unit * direction.Magnitude, findTargetRayParams)
 
+				-- Kontrola viditelnosti (aby nebyl za zdí)
 				if not ray or ray.Instance:IsDescendantOf(enemy) then
 					minDistance = dist
 					bestTarget = enemyRoot
@@ -105,11 +109,29 @@ updateCamera = function(dt)
 end
 
 updateLockOn = function(dt)
-	if not currentTarget or not currentTarget.Parent or not currentTarget.Parent:FindFirstChild("Humanoid") or currentTarget.Parent:FindFirstChild("Humanoid").Health <= 0 then
-		transitionToFreeCam()
-		return
+	-- Zkontrolujeme, jestli aktuální target stále existuje a JESTLI ŽIJE
+	local targetIsDead = false
+	if not currentTarget or not currentTarget.Parent then
+		targetIsDead = true
+	else
+		local targetHum = currentTarget.Parent:FindFirstChild("Humanoid")
+		if not targetHum or targetHum.Health <= 0 then
+			targetIsDead = true
+		end
 	end
 
+	-- Pokud cíl umřel nebo zmizel, najdeme nového
+	if targetIsDead then
+		local newTarget = findNearestEnemy()
+		if newTarget then
+			currentTarget = newTarget -- Našli jsme dalšího, plynule na něj navážeme
+		else
+			transitionToFreeCam() -- Nikdo nablízku, odemykáme kameru
+			return
+		end
+	end
+
+	-- Výpočet pozice pro Lock-On
 	local lookVector = (currentTarget.Position - rootPart.Position).Unit
 	local targetCFrame = CFrame.new(rootPart.Position, rootPart.Position + Vector3.new(lookVector.X, 0, lookVector.Z))
 	rootPart.CFrame = rootPart.CFrame:Lerp(targetCFrame, CAMERA_SMOOTHNESS)
@@ -132,7 +154,7 @@ updateLockOn = function(dt)
 		finalCamPos = idealCamPos
 	end
 
-	-- ViewBobLogic
+	-- ViewBob (pohupování při chůzi)
 	local moveDir = humanoid.MoveDirection
 	local isMoving = moveDir.Magnitude > 0.1
 
@@ -150,7 +172,7 @@ updateLockOn = function(dt)
 		bobY = 0
 	end
 
-	-- TiltLogic
+	-- Tilt (naklánění při pohybu do stran)
 	local targetTilt = 0
 	if isMoving then
 		local rightVector = camera.CFrame.RightVector
@@ -160,8 +182,8 @@ updateLockOn = function(dt)
 
 	currentTilt = math.lerp(currentTilt, targetTilt, dt * TILT_SPEED)
 
+	-- Spojení všeho dohromady
 	local newCamCFrame = CFrame.lookAt(finalCamPos, cameraFocus)
-
 	newCamCFrame = newCamCFrame * CFrame.Angles(0, 0, currentTilt) * CFrame.new(bobX, bobY, 0)
 
 	camera.CFrame = camera.CFrame:Lerp(newCamCFrame, CAMERA_SMOOTHNESS)
@@ -224,6 +246,7 @@ onCharacterAdded = function(newChar)
 	isMouseUnlocked = false
 end
 
+-- Vstupy od hráče
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	if gameProcessed then return end
 
@@ -234,8 +257,10 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	end
 end)
 
+-- Hlavní RenderStep smyčka kamery
 RunService:BindToRenderStep("SoulsCameraUpdate", Enum.RenderPriority.Camera.Value, updateCamera)
 
+-- Inicializace hráče
 player.CharacterAdded:Connect(onCharacterAdded)
 if player.Character then
 	onCharacterAdded(player.Character)
